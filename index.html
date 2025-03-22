@@ -1,0 +1,934 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development Hub</title>
+    <meta name="description" content="Modern web development services" />
+    <meta name="author" content="Web Dev Hub" />
+
+    <meta property="og:title" content="Web Development Hub" />
+    <meta property="og:description" content="Modern web development services" />
+    <meta property="og:type" content="website" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    
+    <style>
+      :root {
+        --color-primary: #3b82f6;
+        --color-primary-dark: #2563eb;
+        --color-secondary: #111827;
+        --color-text: #1f2937;
+        --color-text-light: #6b7280;
+        --color-background: #ffffff;
+        --color-background-alt: #f9fafb;
+        --color-border: #e5e7eb;
+        --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        --transition: all 0.3s ease;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --radius: 0.5rem;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-family);
+        color: var(--color-text);
+        line-height: 1.5;
+        background-color: var(--color-background);
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: var(--transition);
+        text-align: center;
+      }
+
+      .btn-primary {
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--color-primary-dark);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        border: 1px solid var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      .btn-secondary:hover {
+        background-color: rgba(59, 130, 246, 0.1);
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .section-description {
+        font-size: 1.1rem;
+        color: var(--color-text-light);
+        margin-bottom: 2.5rem;
+        max-width: 650px;
+      }
+
+      .highlight {
+        color: var(--color-primary);
+      }
+
+      /* Header styles */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.97);
+        box-shadow: var(--shadow-sm);
+        z-index: 1000;
+        padding: 0.75rem 0;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--color-secondary);
+      }
+
+      .logo span {
+        color: var(--color-primary);
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-primary);
+        transition: var(--transition);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .mobile-menu-btn span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: var(--color-secondary);
+        margin: 5px 0;
+        transition: var(--transition);
+      }
+
+      /* Hero section */
+      .hero {
+        padding: 7rem 0 4rem;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        background-color: var(--color-background-alt);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.1) 100%);
+        clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+        z-index: 0;
+      }
+
+      .hero-content {
+        width: 50%;
+        z-index: 10;
+      }
+
+      .hero .title {
+        font-size: 3.2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero .subtitle {
+        font-size: 1.2rem;
+        color: var(--color-text-light);
+        margin-bottom: 2rem;
+        max-width: 500px;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .hero-image {
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40%;
+        z-index: 5;
+      }
+
+      .code-block {
+        background-color: var(--color-secondary);
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+      }
+
+      .code-block pre {
+        overflow-x: auto;
+      }
+
+      .code-block code {
+        font-family: monospace;
+        color: #f8fafc;
+        font-size: 0.9rem;
+        white-space: pre;
+      }
+
+      /* Services section */
+      .services {
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .service-card {
+        background-color: var(--color-background);
+        padding: 1.75rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        text-align: left;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .service-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background-color: rgba(59, 130, 246, 0.1);
+        color: var(--color-primary);
+        border-radius: 50%;
+        margin-bottom: 1.25rem;
+      }
+
+      .service-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .service-card p {
+        color: var(--color-text-light);
+        font-size: 0.95rem;
+      }
+
+      /* About section */
+      .about {
+        padding: 4rem 0;
+        background-color: var(--color-background-alt);
+      }
+
+      .about-content {
+        max-width: 800px;
+      }
+
+      .about p {
+        margin-bottom: 1.25rem;
+        font-size: 1rem;
+      }
+
+      .about-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
+        margin-top: 2.5rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .stat {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .stat-number {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        line-height: 1;
+      }
+
+      .stat-label {
+        font-size: 0.95rem;
+        color: var(--color-text-light);
+        margin-top: 0.5rem;
+      }
+
+      /* Technologies section */
+      .technologies {
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .tech-categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+      }
+
+      .tech-category h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.25rem;
+        color: var(--color-primary);
+      }
+
+      .tech-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .tech-item {
+        background-color: rgba(59, 130, 246, 0.1);
+        padding: 0.6rem 1.25rem;
+        border-radius: var(--radius);
+        font-weight: 500;
+        transition: var(--transition);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .tech-item:hover {
+        background-color: var(--color-primary);
+        color: white;
+        transform: translateX(5px);
+      }
+
+      /* Contact section */
+      .contact {
+        padding: 4rem 0;
+        background-color: var(--color-background-alt);
+        text-align: center;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: left;
+      }
+
+      .form-group label {
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        padding: 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        font-family: inherit;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      }
+
+      /* Footer styles */
+      .footer {
+        background-color: var(--color-secondary);
+        color: white;
+        padding: 3rem 0 1.5rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .footer-logo p {
+        margin-top: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+      }
+
+      .footer-links h3,
+      .footer-social h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .footer-links ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .footer-links a:hover {
+        color: white;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transition: var(--transition);
+      }
+
+      .social-icons a:hover {
+        background-color: var(--color-primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 1.5rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+      }
+
+      /* Media queries */
+      @media (max-width: 992px) {
+        .hero .title {
+          font-size: 2.5rem;
+        }
+        
+        .hero-content {
+          width: 60%;
+        }
+        
+        .hero-image {
+          width: 35%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-list {
+          display: none;
+        }
+        
+        .mobile-menu-btn {
+          display: block;
+        }
+        
+        .hero {
+          padding: 7rem 0 3rem;
+        }
+        
+        .hero-content {
+          width: 100%;
+          text-align: center;
+        }
+        
+        .hero .subtitle {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        
+        .cta-buttons {
+          justify-content: center;
+        }
+        
+        .hero-image {
+          position: relative;
+          width: 100%;
+          right: auto;
+          top: auto;
+          transform: none;
+          margin-top: 2.5rem;
+        }
+        
+        .about-stats {
+          justify-content: space-between;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .section-title {
+          font-size: 1.9rem;
+        }
+        
+        .service-card,
+        .tech-item {
+          padding: 1.25rem;
+        }
+        
+        .about-stats {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+      }
+
+      /* Mobile menu active state */
+      .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="nav-container">
+          <a href="#" class="logo">WebDev<span>Hub</span></a>
+          <nav class="nav">
+            <ul class="nav-list">
+              <li><a href="#home" class="nav-link">Home</a></li>
+              <li><a href="#services" class="nav-link">Services</a></li>
+              <li><a href="#about" class="nav-link">About</a></li>
+              <li><a href="#technologies" class="nav-link">Technologies</a></li>
+              <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+          </nav>
+          <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1 class="title">Modern Web Development <span class="highlight">Simplified</span></h1>
+            <p class="subtitle">Building the digital experiences of tomorrow with clean code and innovative solutions</p>
+            <div class="cta-buttons">
+              <a href="#services" class="btn btn-primary">Our Services</a>
+              <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <div class="code-block">
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Hello World&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Welcome!&lt;/h1&gt;
+  &lt;p&gt;Your journey starts here.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="services">
+        <div class="container">
+          <h2 class="section-title">Our <span class="highlight">Services</span></h2>
+          <p class="section-description">Comprehensive web development solutions for businesses of all sizes</p>
+          
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
+              </div>
+              <h3>Front-End Development</h3>
+              <p>Crafting responsive and attractive user interfaces with HTML, CSS, and JavaScript that work flawlessly across all devices.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+              </div>
+              <h3>Back-End Development</h3>
+              <p>Building robust server-side applications with secure databases, efficient APIs, and powerful business logic.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <h3>Custom Web Applications</h3>
+              <p>Developing tailor-made web applications that address specific business needs and enhance operational efficiency.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="container">
+          <div class="about-content">
+            <h2 class="section-title">About <span class="highlight">WebDevHub</span></h2>
+            <p>At WebDevHub, we blend technical expertise with creative problem-solving to build modern, efficient, and scalable web applications. Our team combines years of industry experience with a passion for staying at the cutting edge of technology.</p>
+            <p>We believe in writing clean, maintainable code and following best practices to ensure our solutions are robust, secure, and future-proof.</p>
+            <div class="about-stats">
+              <div class="stat">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Projects Completed</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Happy Clients</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="technologies" class="technologies">
+        <div class="container">
+          <h2 class="section-title">Our <span class="highlight">Tech Stack</span></h2>
+          <p class="section-description">We use the latest technologies to build powerful and efficient web applications</p>
+          
+          <div class="tech-categories">
+            <div class="tech-category">
+              <h3>Frontend</h3>
+              <ul class="tech-list">
+                <li class="tech-item">HTML5</li>
+                <li class="tech-item">CSS3</li>
+                <li class="tech-item">JavaScript</li>
+                <li class="tech-item">React</li>
+                <li class="tech-item">Vue.js</li>
+              </ul>
+            </div>
+            <div class="tech-category">
+              <h3>Backend</h3>
+              <ul class="tech-list">
+                <li class="tech-item">Node.js</li>
+                <li class="tech-item">Express</li>
+                <li class="tech-item">Python</li>
+                <li class="tech-item">PHP</li>
+                <li class="tech-item">Ruby on Rails</li>
+              </ul>
+            </div>
+            <div class="tech-category">
+              <h3>Database</h3>
+              <ul class="tech-list">
+                <li class="tech-item">MongoDB</li>
+                <li class="tech-item">MySQL</li>
+                <li class="tech-item">PostgreSQL</li>
+                <li class="tech-item">Firebase</li>
+                <li class="tech-item">Redis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
+          <p class="section-description">Have a project in mind? Let's discuss how we can help bring your ideas to life</p>
+          
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <a href="#" class="logo">WebDev<span>Hub</span></a>
+            <p>Building the digital experiences of tomorrow</p>
+          </div>
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#technologies">Technologies</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-social">
+            <h3>Connect With Us</h3>
+            <div class="social-icons">
+              <a href="#" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="#" aria-label="Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="#" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2023 WebDevHub. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Wait for the DOM to be fully loaded
+      document.addEventListener("DOMContentLoaded", function() {
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+        const nav = document.querySelector(".nav");
+        
+        if (mobileMenuBtn) {
+          mobileMenuBtn.addEventListener("click", function() {
+            // Toggle active class for menu button animation
+            this.classList.toggle("active");
+            
+            // If nav exists and we're on mobile, toggle display
+            if (nav && window.innerWidth <= 768) {
+              if (nav.style.display === "block") {
+                nav.style.display = "none";
+              } else {
+                nav.style.display = "block";
+                nav.style.position = "absolute";
+                nav.style.top = "100%";
+                nav.style.left = "0";
+                nav.style.width = "100%";
+                nav.style.backgroundColor = "white";
+                nav.style.padding = "1rem";
+                nav.style.boxShadow = "0 10px 15px -3px rgba(0, 0, 0, 0.1)";
+              }
+            }
+          });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Close mobile menu if open
+            if (nav && nav.style.display === "block" && window.innerWidth <= 768) {
+              nav.style.display = "none";
+              if (mobileMenuBtn) {
+                mobileMenuBtn.classList.remove("active");
+              }
+            }
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80, // Offset for fixed header
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById("contact-form");
+        
+        if (contactForm) {
+          contactForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+            
+            // Simple validation
+            if (!name || !email || !message) {
+              alert("Please fill in all fields");
+              return;
+            }
+            
+            // For demo purposes, we'll just show a success message
+            console.log("Form submitted:", { name, email, message });
+            
+            // Show success message
+            alert("Thank you for your message! We'll get back to you soon.");
+            
+            // Reset form
+            contactForm.reset();
+          });
+        }
+        
+        // Animate elements when they come into view
+        const animateOnScroll = function() {
+          const elements = document.querySelectorAll('.service-card, .tech-item, .about-stats, .section-title');
+          
+          elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+              element.style.opacity = "1";
+              element.style.transform = "translateY(0)";
+            }
+          });
+        };
+        
+        // Run animation on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Header scroll effect
+        const header = document.querySelector('.header');
+        
+        if (header) {
+          window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+              header.style.padding = "0.75rem 0";
+              header.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1)";
+            } else {
+              header.style.padding = "1rem 0";
+              header.style.boxShadow = "0 1px 2px rgba(0, 0, 0, 0.05)";
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
